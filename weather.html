@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Weather Information</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="city" placeholder="Enter city name" required>
+                        <button type="submit" class="btn btn-primary">Get Weather</button>
+                    </div>
+                </form>
+
+                {% if weather_data %}
+                <div class="weather-info">
+                    <h3 class="text-center mb-4">{{ weather_data.name }}, {{ weather_data.sys.country }}</h3>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h4>Temperature</h4>
+                                    <p class="display-4">{{ weather_data.main.temp }}°C</p>
+                                    <p>Feels like: {{ weather_data.main.feels_like }}°C</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h4>Weather</h4>
+                                    <p class="display-4">{{ weather_data.weather[0].main }}</p>
+                                    <p>{{ weather_data.weather[0].description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 text-center">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5>Humidity</h5>
+                                    <p>{{ weather_data.main.humidity }}%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5>Wind Speed</h5>
+                                    <p>{{ weather_data.wind.speed }} m/s</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5>Pressure</h5>
+                                    <p>{{ weather_data.main.pressure }} hPa</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
